@@ -13,16 +13,16 @@ while True:
     passwordLenght = int(input('How long your password needs to be?: '))
     symbols = passwordLenght
     passReqUpper = int(
-        input(f'How many Uppercase letters? (You can use {symbols}) symbols: '))
+        input(f'How many Uppercase letters? (You can use {symbols} symbols): '))
     symbols = passwordLenght - passReqUpper
     passReqLower = int(
-        input(f'How many Lowercase letters? (You can use {symbols}) symbols: '))
+        input(f'How many Lowercase letters? (You can use {symbols} symbols): '))
     symbols = passwordLenght - passReqUpper - passReqLower
     passReqPunkt = int(
-        input(f'How many Punctuation letters? (You can use {symbols}) symbols: '))
+        input(f'How many Punctuation letters? (You can use {symbols} symbols): '))
     symbols = passwordLenght - passReqUpper - passReqLower - passReqPunkt
     passReqDigit = int(
-        input(f'How many Digits letters? (You can use {symbols}) symbols: '))
+        input(f'How many Digits letters? (You can use {symbols} symbols): '))
     passReqLenght = passReqUpper + passReqLower + passReqPunkt + passReqDigit
     if passReqLenght > passwordLenght:
         print('Password cannot be created as you putted to many symbols in lenght of the password')
