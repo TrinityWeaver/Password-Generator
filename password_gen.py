@@ -25,7 +25,7 @@ while True:
         input(f'How many Digits letters? (You can use {symbols} symbols): '))
     passReqLenght = passReqUpper + passReqLower + passReqPunkt + passReqDigit
     if passReqLenght > passwordLenght:
-        print('Password cannot be created as you putted to many symbols in lenght of the password')
+        print('Password cannot be created as you put to many symbols in lenght of the password')
         continue
     else:
         break
