@@ -5,6 +5,7 @@
 
 import string
 import random
+import bcrypt
 
 
 # Inputs from user - Requiments for password
@@ -58,7 +59,7 @@ for digit in range(passReqDigit):
 
 # Lenght of leftovers symbols for future randomazing
 
-dlugoscHasla = passwordLenght - passReqLenght
+theLenghtofPassword = passwordLenght - passReqLenght
 
 
 # If user havent used all "Symbols", random the rest
@@ -66,16 +67,24 @@ dlugoscHasla = passwordLenght - passReqLenght
 listOfstringMethods = string.ascii_letters + string.punctuation + string.digits
 
 
-for passwordRandom in range(dlugoscHasla):
+for passwordRandom in range(theLenghtofPassword):
     passwordRandom = random.choice(listOfstringMethods)
     password.append(passwordRandom)
 
 # Randomize symbols, letters and digits
 
-nowaLista = password + ranUpper + ranLower + ranPunkt + ranDigit
+newPassword = password + ranUpper + ranLower + ranPunkt + ranDigit
 
-random.shuffle(nowaLista)
+random.shuffle(newPassword)
 
 # Print password
 
-print('Your secure password is: ', *nowaLista, sep='')
+print('Your secure password is: ', *newPassword, sep='')
+
+hashingQuest = input(
+    'Would you like to hash your password?\nAnswer with Yes or No: ')
+passBytes = bytes(f'{newPassword}', 'utf-8')
+print(passBytes)
+if hashingQuest == 'Yes':
+    hashedPass = bcrypt.hashpw(passBytes, bcrypt.gensalt())
+    print(hashedPass)
