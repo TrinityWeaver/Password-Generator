@@ -10,7 +10,13 @@ import bcrypt
 
 # Inputs from user - Requiments for password
 
-while True:
+print('Password Generator v.2.0\nAuthor: Sebastian Marynicz')
+
+firstChoice = input(
+    'Would you like to create randomized password or hashed?\n Type in "Random" or "Hash": ')
+
+if firstChoice == "Random":
+    while True:
     passwordLenght = int(input('How long your password needs to be?: '))
     symbols = passwordLenght
     passReqUpper = int(
@@ -32,12 +38,11 @@ while True:
         break
 
 # Lists for creating and randomizing Password
-
-password = []
-ranUpper = []
-ranLower = []
-ranPunkt = []
-ranDigit = []
+    password = []
+    ranUpper = []
+    ranLower = []
+    ranPunkt = []
+    ranDigit = []
 
 
 for upper in range(passReqUpper):
