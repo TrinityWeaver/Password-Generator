@@ -6,6 +6,8 @@
 import string
 import random
 import bcrypt
+import csv
+import os
 
 
 # Inputs from user - Requiments for password
@@ -14,6 +16,10 @@ print('Password Generator v.2.0\nAuthor: Sebastian Marynicz')
 
 firstChoice = input(
     'Would you like to create randomized password or hashed?\n Type in "Random" or "Hash": ')
+url = input('Please provide an url for password: ')
+userName = input('Please provide a username/email: ')
+
+loopsforpass = False
 
 
 while firstChoice == "Random":
@@ -89,11 +95,42 @@ if loopsforpass:
 
     print('Your secure password is: ', *newPassword, sep='')
 
+    randomPassword = ''.join(newPassword)
+    if os.path.exists('./secrets.csv') == True:
+        with open('secrets.csv', 'a', newline='') as file:
+            writer = csv.writer(file, delimiter=':')
+            writer.writerow([f'{url}', f'{userName}', f'{randomPassword}'])
 
-# Hashing Password
-# else:
-#passwordToHash = input('Provide a password for hashing: ')
-#passBytes = bytes(f'{passwordToHash}', 'utf-8')
-# print(passBytes)
-#hashedPass = bcrypt.hashpw(passBytes, bcrypt.gensalt(15))
-# print(hashedPass)
+    else:
+        with open('secrets.csv', 'a', newline='') as file:
+            writer = csv.writer(file, delimiter=':')
+            writer.writerow(["url", "Username", "Password"])
+            writer.writerow(
+                [f'{url}', f'{userName}', f'{randomPassword}'])
+
+        # Hashing Password
+if loopsforpass == False:
+    while firstChoice == 'Hash':
+        passwordToHash = input('Provide a password for hashing: ')
+        passBytes = bytes(f'{passwordToHash}', 'utf-8')
+        hashedPass = bcrypt.hashpw(passBytes, bcrypt.gensalt(15))
+        if bcrypt.checkpw(passBytes, hashedPass):
+            print('Password macthes!')
+            hashedPass = hashedPass.decode('utf-8')
+            if os.path.exists('./secrets.csv') == True:
+                with open('secrets.csv', 'a', newline='') as file:
+                    writer = csv.writer(file, delimiter=':')
+                    writer.writerow([f'{url}', f'{userName}', f'{hashedPass}'])
+                break
+            else:
+                with open('secrets.csv', 'a', newline='') as file:
+                    writer = csv.writer(file, delimiter=':')
+                    writer.writerow(["url", "Username", "Password"])
+                    writer.writerow(
+                        [f'{url}', f'{userName}', f'{hashedPass}'])
+                break
+        else:
+            print('Password dont match!')
+            continue
+    else:
+        print('You left program!')
