@@ -98,12 +98,12 @@ if loopsforpass:
     randomPassword = ''.join(newPassword)
     if os.path.exists('./secrets.csv') == True:
         with open('secrets.csv', 'a', newline='') as file:
-            writer = csv.writer(file, delimiter=':')
+            writer = csv.writer(file, delimiter=',')
             writer.writerow([f'{url}', f'{userName}', f'{randomPassword}'])
 
     else:
         with open('secrets.csv', 'a', newline='') as file:
-            writer = csv.writer(file, delimiter=':')
+            writer = csv.writer(file, delimiter=',')
             writer.writerow(["url", "Username", "Password"])
             writer.writerow(
                 [f'{url}', f'{userName}', f'{randomPassword}'])
@@ -119,12 +119,12 @@ if loopsforpass == False:
             hashedPass = hashedPass.decode('utf-8')
             if os.path.exists('./secrets.csv') == True:
                 with open('secrets.csv', 'a', newline='') as file:
-                    writer = csv.writer(file, delimiter=':')
+                    writer = csv.writer(file, delimiter=',')
                     writer.writerow([f'{url}', f'{userName}', f'{hashedPass}'])
                 break
             else:
                 with open('secrets.csv', 'a', newline='') as file:
-                    writer = csv.writer(file, delimiter=':')
+                    writer = csv.writer(file, delimiter=',')
                     writer.writerow(["url", "Username", "Password"])
                     writer.writerow(
                         [f'{url}', f'{userName}', f'{hashedPass}'])
