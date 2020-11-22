@@ -108,11 +108,7 @@ if loopsforpass:
 
     theLenghtofPassword = passwordLenght - passReqLenght
     listOfstringMethods = string.ascii_letters + string.punctuation + string.digits
-    print(theLenghtofPassword)
-    print(passwordLenght)
-    print(passReqLenght)
-    print(theLenghtofPassword)
-    print(ranUpper)
+
     for passwordRandom in range(theLenghtofPassword):
         passwordRandom = random.choice(listOfstringMethods)
         password.append(passwordRandom)
