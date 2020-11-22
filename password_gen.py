@@ -10,7 +10,36 @@ import csv
 import os
 
 
-# Inputs from user - Requiments for password
+# Function for attaching symbols left into string
+def symbolsFun(firstValue, secondValue=0, thirdValue=0, fourthValue=0):
+    symbolsFun = firstValue - secondValue - thirdValue - fourthValue
+    return symbolsFun
+
+
+# Function for calculation how much more symbols program can put inside teh password
+def passReqLenghtFunction(fv, fv2, fv3, fv4):
+    suma = fv + fv2 + fv3 + fv4
+    return suma
+
+
+def randomSym(sym):
+    if sym == 'passReqUpper':
+        for upper in range(passReqUpper):
+            upper = random.choice(string.ascii_uppercase)
+            ranUpper.append(upper)
+    elif sym == 'passReqLower':
+        for lower in range(passReqLower):
+            lower = random.choice(string.ascii_lowercase)
+            ranLower.append(lower)
+    elif sym == 'passReqPunkt':
+        for punkt in range(passReqPunkt):
+            punkt = random.choice(string.punctuation)
+            ranPunkt.append(punkt)
+    elif sym == 'passReqDigit':
+        for digit in range(passReqDigit):
+            digit = random.choice(string.digits)
+            ranDigit.append(digit)
+
 
 print('Password Generator v.2.0\nAuthor: Sebastian Marynicz')
 
@@ -28,19 +57,21 @@ while firstChoice == "Random":
         'Would you like to proceed with default or customized option?\nType in "Default" or "Custom": ')
     if defaultPassword == 'Custom':
         passwordLenght = int(input('How long your password needs to be?: '))
-        symbols = passwordLenght
+        symbols = symbolsFun(passwordLenght)
         passReqUpper = int(
             input(f'How many Uppercase letters? (You can use {symbols} symbols): '))
-        symbols = passwordLenght - passReqUpper
+        symbols = symbolsFun(passwordLenght, passReqUpper)
         passReqLower = int(
             input(f'How many Lowercase letters? (You can use {symbols} symbols): '))
-        symbols = passwordLenght - passReqUpper - passReqLower
+        symbols = symbolsFun(passwordLenght, passReqUpper, passReqLower)
         passReqPunkt = int(
             input(f'How many Punctuation letters? (You can use {symbols} symbols): '))
-        symbols = passwordLenght - passReqUpper - passReqLower - passReqPunkt
+        symbols = symbolsFun(passwordLenght, passReqUpper,
+                             passReqLower, passReqPunkt)
         passReqDigit = int(
             input(f'How many Digits letters? (You can use {symbols} symbols): '))
-        passReqLenght = passReqUpper + passReqLower + passReqPunkt + passReqDigit
+        passReqLenght = passReqLenghtFunction(
+            passReqUpper, passReqLower, passReqPunkt, passReqDigit)
         if passReqLenght > passwordLenght:
             print(
                 'Password cannot be created as you put to many symbols in lenght of the password')
@@ -70,22 +101,18 @@ ranLower = []
 ranPunkt = []
 ranDigit = []
 if loopsforpass:
-    for upper in range(passReqUpper):
-        upper = random.choice(string.ascii_uppercase)
-        ranUpper.append(upper)
-    for lower in range(passReqLower):
-        lower = random.choice(string.ascii_lowercase)
-        ranLower.append(lower)
-    for punkt in range(passReqPunkt):
-        punkt = random.choice(string.punctuation)
-        ranPunkt.append(punkt)
-    for digit in range(passReqDigit):
-        digit = random.choice(string.digits)
-        ranDigit.append(digit)
+    randomSym('passReqUpper')
+    randomSym('passReqLower')
+    randomSym('passReqPunkt')
+    randomSym('passReqDigit')
 
     theLenghtofPassword = passwordLenght - passReqLenght
     listOfstringMethods = string.ascii_letters + string.punctuation + string.digits
-
+    print(theLenghtofPassword)
+    print(passwordLenght)
+    print(passReqLenght)
+    print(theLenghtofPassword)
+    print(ranUpper)
     for passwordRandom in range(theLenghtofPassword):
         passwordRandom = random.choice(listOfstringMethods)
         password.append(passwordRandom)
