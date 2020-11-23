@@ -42,6 +42,31 @@ def randomSym(sym):
             digit = random.choice(string.digits)
             ranDigit.append(digit)
 
+# Function to randomize leftovers symbols
+
+
+def passwordRandom(theLenghtofPassword):
+    for passwordRandom in range(theLenghtofPassword):
+        passwordRandom = random.choice(listOfstringMethods)
+        password.append(passwordRandom)
+
+# Funktion for adding all variables to create random password
+
+
+def newpassword(fv, fv2, fv3, fv4, f5):
+    newpassword = fv + fv2 + fv3 + fv4 + f5
+    return newpassword
+
+
+def hashingPassword(word):
+    hashingPassword = bcrypt.hashpw(passBytes, bcrypt.gensalt(15))
+    return hashingPassword
+
+
+def lenpass(v, v1):
+    lenpass = v - v1
+    return lenpass
+
 
 print('Password Generator v.2.0\nAuthor: Sebastian Marynicz')
 
@@ -103,19 +128,24 @@ ranLower = []
 ranPunkt = []
 ranDigit = []
 if loopsforpass:
+    # Function def randomSym(sym)
     randomSym('passReqUpper')
+    # Function def randomSym(sym)
     randomSym('passReqLower')
+    # Function def randomSym(sym)
     randomSym('passReqPunkt')
+    # Function def randomSym(sym)
     randomSym('passReqDigit')
 
-    theLenghtofPassword = passwordLenght - passReqLenght
+    # Function lenpass(v, v1)
+    theLenghtofPassword = lenpass(passwordLenght, passReqLenght)
     listOfstringMethods = string.ascii_letters + string.punctuation + string.digits
 
-    for passwordRandom in range(theLenghtofPassword):
-        passwordRandom = random.choice(listOfstringMethods)
-        password.append(passwordRandom)
+    # Function def passwordRandom(theLenghtofPassword):
+    passwordRandom(theLenghtofPassword)
 
-    newPassword = password + ranUpper + ranLower + ranPunkt + ranDigit
+    # Function def newpassword(fv, fv2, fv3, fv4, f5):
+    newPassword = newpassword(password, ranUpper, ranLower, ranPunkt, ranDigit)
     random.shuffle(newPassword)
 
     print('Your secure password is: ', *newPassword, sep='')
@@ -133,12 +163,13 @@ if loopsforpass:
             writer.writerow(
                 [f'{url}', f'{userName}', f'{randomPassword}'])
 
-        # Hashing Password
+# Hashing Password
 if loopsforpass == False:
     while firstChoice == 'Hash':
         passwordToHash = input('Provide a password for hashing: ')
         passBytes = bytes(f'{passwordToHash}', 'utf-8')
-        hashedPass = bcrypt.hashpw(passBytes, bcrypt.gensalt(15))
+        # Function  def hashingPassword(word):
+        hashedPass = hashingPassword(passwordToHash)
         if bcrypt.checkpw(passBytes, hashedPass):
             print('Password macthes!')
             hashedPass = hashedPass.decode('utf-8')
