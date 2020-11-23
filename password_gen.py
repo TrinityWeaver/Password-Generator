@@ -21,6 +21,8 @@ def passReqLenghtFunction(fv, fv2, fv3, fv4):
     suma = fv + fv2 + fv3 + fv4
     return suma
 
+# Function for randomizing chosen numbers of symbols
+
 
 def randomSym(sym):
     if sym == 'passReqUpper':
